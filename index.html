@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="icon" href="">
+		<link rel="stylesheet" type="text/css" href="assets/css/font-awesome/4.7.0/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/material-icons/3.0.1/material-icons.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+		<title>
+			Blank page
+		</title>
+	</head>
+	<body>
+<!-- This is main wrapper for the rest of the file -->
+		<div class="wrapper">
+<!-- This is header. Here you can find Logo, Title and navbar -->			
+			<div class="header">
+				<div class="logo">
+					<div class="img-container">
+						<div class="img">
+							<img src="#">
+						</div>
+					</div>
+				</div>
+				<div class="main-title"></div>
+				<div class="navbar">
+					<!-- dio za pozivanje skripta -->
+				 <div id="navDropdown" class="dropdown" >
+					<button onclick="myFunction()" class="drop-btn"><span>Dropdown</span><i>ikonica ide ovdje</i></button>  
+				 	<div  class="dropdown-content">
+					    <ul>
+					    <li><a href="#"><span>Home</span></a></li>
+					    <li><a href="#"><span>About</span></a></li>
+					    <li><a href="#"><span>Contact</span></a></li>
+						</ul>
+					</div>
+				 	<i>ikonica ide ovdje</i>
+  				</div>
+
+			</div>
+<!-- I iz a big bad banner RAAWWWRRRR i contain images that appear and disappear or how ever you misspell it -->
+			<div class="banner">
+					<div class="img-container">
+						<div class="img">
+							<img src="#">
+						</div>
+					</div>
+					<div class="img-container">
+						<div class="img">
+							<img src="#">
+						</div>
+					</div>
+					<div class="img-container">
+						<div class="img">
+							<img src="#">
+						</div>
+					</div>
+			</div>
+<!-- Main container is a place where main container things are placed. Images for thingies, their texts etc -->
+			<div class="main-container">
+				<div class="container1">
+					<div class="img-container">
+						<div class="img">
+							<img src="#">
+						</div>
+					</div>
+					<div class="container-text"><span>Container text 1</span></div>
+				</div>
+				<div class="container1">
+					<div class="img-container">
+						<div class="img">
+							<img src="#">
+						</div>
+					</div>
+					<div class="container-text"><span>Container text 2</span></div>
+				</div>
+				<div class="container1">
+					<div class="img-container">
+						<div class="img">
+							<img src="#">
+						</div>
+					</div>
+					<div class="container-text"><span>Container text 3</span></div>
+				<div class="container1">
+					<div class="img-container">
+						<div class="img">
+							<img src="#">
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- Nice form field ripped of from z netz. Should work nicley -->
+			<div class="contact">
+				<div class="contact-container">  
+				  <form id="contact" action="" method="post">
+				    
+				    <fieldset>
+				      <input placeholder="Your name" type="text" tabindex="1" required autofocus>
+				    </fieldset>
+				    <fieldset>
+				      <input placeholder="Your Email Address" type="email" tabindex="2" required>
+				    </fieldset>
+				    <fieldset>
+				      <input placeholder="Your Phone Number" type="tel" tabindex="3" required>
+				    </fieldset>
+				   <fieldset>
+				      <textarea placeholder="Type your Message Here...." tabindex="4" required></textarea>
+				    </fieldset>
+				    <fieldset>
+				      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit to ME!!!</button>
+				    </fieldset>
+				  </form>
+ 			<!-- you wanted a button here -->
+ 				<button>I'm a button</button>
+				</div>
+			</div>
+<!-- Nobody cares about footer -->
+			<div class="footer">
+				<ul>
+					<li><a href="#">first link </a></li>
+					<li><a href="#">second link </a></li>
+					<li><a href="#">third link </a></li>
+				</ul>
+			</div>
+			<!-- this is the all rights reserved/version number/year of establishment/??? part. The.... underfooter (?) -->
+			<div></div>
+		</div>
+
+
+
+
+<!--
+		<i class="material-icons">home</i>
+		<i class="fa fa-pinterest"></i>
+
+		<script src="assets/js/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="assets/js/main.js"></script>
+		
+		
+		Material Icons
+		==============
+
+		Link to the online database:	https://material.io/icons/
+
+		Syntax:
+
+		<i class="material-icons">icon_name</i>
+
+		*note:
+			-	icon name is all lowercase
+			-	multiple words in icon names use the "_" character as separator
+
+		Font Awesome
+		============
+
+		Link to the online database:	http://fontawesome.io/icons/
+
+		Syntax:
+
+		<i class="fa fa-icon_name"></i>
+
+		*note
+			-	all icons have to include the "fa" class
+			-	icon name is all lowercase
+			-	multiple words in icon names use the "-" character as separator
+			-	all icon names must be preceded by the "fa-" prefix
+
+		-->
+	</body>
+	<script type="text/javascript">
+		var classes = [];
+
+$('body *:not(script)').each(function(){
+  _classes = $(this).attr('class') ? $(this).attr('class').split(' ') : []
+  _classes.forEach(function(entry){
+    if(classes.indexOf(entry) < 0){
+      classes.push(entry)
+    }
+  })
+})
+
+console.log(classes)
+	</script>
+</html>
