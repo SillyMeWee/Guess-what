@@ -1,0 +1,255 @@
+/*
+	Table of Contents:
+	
+		1.	variables used to configure the page
+		2.	initial setup and removing default styles
+		3.	main stylesheet for the page
+
+*/
+
+
+
+/* ==== 1. Variables ==== */ 
+
+
+
+$font-color-default: black;
+
+
+
+/* ==== 2. Initial setup ==== */
+
+
+
+body {
+	// remove default margin
+	margin: 0;
+}
+
+// Setup the basics for the rest of the stylesheet.
+div {
+	// This will remove the resizing of the element on hover
+	// when a border is added or changes in width.
+	box-sizing: border-box;
+	// Since we work with CSS grid and use some classes that require
+	// certain settings to be on an element to work properly,
+	// this part is absolutely necessary.
+	display: grid;
+	position: relative;
+}
+
+// Remove default styling for lists while leaving the posibility open
+// by using the .default class on the element.
+ul:not(.default) {
+	padding: 0;
+	margin: 0;
+
+	// this removes the bullet points from lists
+	list-style: none;
+	
+	& > li {
+		padding: 0;
+		margin: 0;
+
+		// this removes the bullet points from lists
+		list-style: none;
+	}
+}
+
+button:not(.default) {
+	@extend div;
+	@include border;
+	@include border-radius;
+
+	padding: 0;
+	margin: 0;
+
+	outline: none;
+}
+
+input:not(.default) {
+	@extend div;
+	@include border;
+	@include border-radius;
+
+	padding: 0 5px;
+	margin: 0;
+
+	outline: none;
+}
+
+a:not(.default) {
+	display: inline;
+	width: auto;
+	height: auto;
+
+	text-decoration: none;
+	color: $font-color-default;
+
+	// Show that this is a link by changing the cursor
+	// to a pointing hand.
+	cursor: pointer;
+
+	// Sometimes you want the link to fit the content,
+	// but in cases where it's preferable for it to fit
+	// it's container, this can be done by using the
+	// .stretch class on the <a> element.
+	&.stretch {
+		@extend [data-stretch=XY];
+	}
+}
+
+
+
+/* ==== 3. Stylesheet ==== */
+
+
+
+.wrapper {
+	grid-template-columns: auto;
+
+	font-family: "Myriad Pro", sans-serif;
+}
+
+.header {
+	grid-template-columns: auto 1fr auto;
+
+	& > .logo {
+		// place in the left column
+		grid-column: 1;
+		
+		& > * {
+			// align with left edge
+			@extend [data-align=W];
+		}
+	}
+
+	& > .main-title {
+		// place in the middle column
+		grid-column: 2;
+		
+		& > * {
+			// align to the middle
+			@extend [data-align=center];
+		}
+	}
+
+	& > .navbar {
+		// place in the right column
+		grid-column: 3;
+		
+		& > * {
+			// align to the right
+			@extend [data-align=E];
+		}
+	}
+}
+
+.banner {
+	@extend [data-stretch=X];
+
+	height: 100vh;
+}
+
+.content {
+	grid-gap: 50px;
+
+	& > .item {
+		grid-gap: 30px;
+
+		// alternate between placing the image left and right
+		&:nth-child(2n) {
+			grid-template-areas:
+				"image	title"
+				"image	text";	
+		}
+
+		&:nth-child(2n - 1) {
+			grid-template-areas:
+				"title	image"
+				"text	image";
+		}
+
+		& > span {
+			// stretch text from edge to edge
+			text-align: justify;
+		}
+	}
+}
+
+
+/*	All images are in two containers:
+	First container hides overflow with data-scroll=none
+	Second container wraps around the image and fills the whole parent with it
+
+	This is set by default for images where width >= height.
+	To override it and fill the container for images where height > width
+	use the .vertical class on the first container.
+
+*/
+.image-container {
+	// hide overflow
+	@extend [data-scroll=none];
+
+	& > .image {
+		// stretch the image to fit by height,
+		// width may overflow
+		@extend [data-stretch=Y];
+		// position the image correctly
+		@extend [data-align=abs-center];
+		
+		& > img {
+			// fit image to parent's height
+			@extend [data-stretch=Y];
+		}
+	}
+
+	&.vertical {
+		& > .image {
+			// stretch the image to fit by width,
+			// height may overflow
+			@extend [data-stretch=X];
+			
+			& > img {
+				// fit image to parent's width
+				@extend [data-stretch=X];
+			}
+		}
+	}
+}
+
+.dropdown {
+	grid-gap: 5px;
+	padding: 0 10px;
+
+	& > .drop-btn {
+		@extend [data-stretch=Y];
+
+		&:hover {
+			background-color: $black-20;
+		}
+	}
+
+	& > .dropdown-content {
+
+		ul {
+			@extend [data-align=abs-outside-Sright];
+
+			//display: none;
+		}
+	}
+}
+
+.wrapper, .header, .banner, .main-container, .contact, .footer {
+	@include border;
+}
+
+.main-title {
+	font-weight: bold;
+	letter-spacing: 1px;
+
+	big {
+		font-family: "Arial";
+		font-size: 1.5em;
+	}
+}
