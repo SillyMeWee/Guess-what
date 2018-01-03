@@ -1,25 +1,20 @@
 /*
 	Table of Contents:
 	
-		1.	variables used to configure the page
-		2.	initial setup and removing default styles
-		3.	main stylesheet for the page
+		1.	initial setup and removing default styles
+		2.	main stylesheet for the page
 
 */
-
-
-
-/* ==== 1. Variables ==== */ 
-
-
-
-$font-color-default: black;
-
 
 
 /* ==== 2. Initial setup ==== */
 
 
+
+// TESTING BORDER
+.wrapper, .header, .banner, .main-container, .contact, .footer {
+	//@include border;
+}
 
 body {
 	// remove default margin
@@ -41,6 +36,8 @@ div {
 // Remove default styling for lists while leaving the posibility open
 // by using the .default class on the element.
 ul:not(.default) {
+	@extend div;
+
 	padding: 0;
 	margin: 0;
 
@@ -58,24 +55,35 @@ ul:not(.default) {
 
 button:not(.default) {
 	@extend div;
-	@include border;
 	@include border-radius;
 
-	padding: 0;
+	padding: 1em .5em;
 	margin: 0;
+	align-items: normal;
 
+	background-color: transparent;
 	outline: none;
+	font-family: inherit;
+
+	&.primary-btn {
+		border: none;
+		background-color: $primary-color;
+	}
 }
 
 input:not(.default) {
 	@extend div;
-	@include border;
+	//@include border;
 	@include border-radius;
 
 	padding: 0 5px;
 	margin: 0;
 
-	outline: none;
+	border: none;
+
+	&:focus, &:hover, &:invalid {
+		outline: none;
+	}
 }
 
 a:not(.default) {
@@ -84,7 +92,7 @@ a:not(.default) {
 	height: auto;
 
 	text-decoration: none;
-	color: $font-color-default;
+	color: inherit;
 
 	// Show that this is a link by changing the cursor
 	// to a pointing hand.
@@ -99,6 +107,14 @@ a:not(.default) {
 	}
 }
 
+tiny {
+	font-size: .7em;
+}
+
+fieldset {
+	border: none;
+}
+
 
 
 /* ==== 3. Stylesheet ==== */
@@ -109,10 +125,18 @@ a:not(.default) {
 	grid-template-columns: auto;
 
 	font-family: "Myriad Pro", sans-serif;
+	font-size: 18px;
 }
 
 .header {
+
+			// FUCK FUCK fix this shit bro, the main-title is not in the middle
+			// when the logo and navbar have different widths
+	
 	grid-template-columns: auto 1fr auto;
+
+	background-color: $black-75;
+	color: $white-75;
 
 	& > .logo {
 		// place in the left column
@@ -151,28 +175,36 @@ a:not(.default) {
 	height: 100vh;
 }
 
-.content {
+.main-container {
 	grid-gap: 50px;
+	margin: 0 auto 0 auto;
+	min-width: 90%;
 
-	& > .item {
+	& > .container {
 		grid-gap: 30px;
 
 		// alternate between placing the image left and right
 		&:nth-child(2n) {
 			grid-template-areas:
-				"image	title"
-				"image	text";	
+				"title	image"
+				"text	image";
+			grid-template-columns: 1fr auto;
 		}
 
 		&:nth-child(2n - 1) {
 			grid-template-areas:
-				"title	image"
-				"text	image";
+				"image	title"
+				"image	text";
+			grid-template-columns: auto 1fr;
 		}
 
-		& > span {
-			// stretch text from edge to edge
-			text-align: justify;
+		& > .container-text {
+			margin: 20px;
+
+			& > span {
+				// stretch text from edge to edge
+				text-align: justify;
+			}
 		}
 	}
 }
@@ -187,61 +219,61 @@ a:not(.default) {
 	use the .vertical class on the first container.
 
 */
-.image-container {
+.img-container {
 	// hide overflow
 	@extend [data-scroll=none];
 
-	& > .image {
-		// stretch the image to fit by height,
-		// width may overflow
-		@extend [data-stretch=Y];
-		// position the image correctly
+	& > .img {
 		@extend [data-align=abs-center];
-		
-		& > img {
-			// fit image to parent's height
-			@extend [data-stretch=Y];
-		}
 	}
 
-	&.vertical {
-		& > .image {
+	/*&.vertical {
+		& > .img {
+			// position the image parent correctly
+			@extend [data-align=abs-center];
 			// stretch the image to fit by width,
 			// height may overflow
 			@extend [data-stretch=X];
 			
 			& > img {
+				// position the image correctly
+				@extend [data-align=abs-center];
 				// fit image to parent's width
 				@extend [data-stretch=X];
 			}
 		}
-	}
+	}*/
 }
 
 .dropdown {
-	grid-gap: 5px;
+	//grid-gap: 5px;
 	padding: 0 10px;
 
 	& > .drop-btn {
-		@extend [data-stretch=Y];
+		padding: 0 10px;
+
+		border-radius: 0;
 
 		&:hover {
 			background-color: $black-20;
+
+			& * {
+			color: $white;
+			}
 		}
 	}
 
 	& > .dropdown-content {
+		@extend [data-align=abs-outside-Sright];
+
+		display: none;
+
+		//background-color: red;
 
 		ul {
-			@extend [data-align=abs-outside-Sright];
-
-			//display: none;
+		
 		}
 	}
-}
-
-.wrapper, .header, .banner, .main-container, .contact, .footer {
-	@include border;
 }
 
 .main-title {
@@ -253,3 +285,138 @@ a:not(.default) {
 		font-size: 1.5em;
 	}
 }
+
+.main-container {
+	& > .container {
+		background-color: $black-10;
+
+		& > .img-container {
+			grid-area: image;
+			// aspect ratio of the placeholder screenshots is 1:1.10437
+			width: 550px;
+			height: 330px;
+		}
+	}
+}
+
+#navDropdown {
+	@extend [data-stretch=Y];
+
+
+	& > .drop-btn {
+		@extend [data-stretch=Y];
+
+		//min-height: 100%;
+
+		color: $white-75;
+		border: none;
+
+		& > * {
+			grid-row: 1;
+		}
+
+		& > i {
+			//color: red !important;
+			display: none;
+		}
+	}
+}
+
+.contact-container {
+	background-color: $black-50;
+
+	& > #contact {
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 10px;
+		margin: auto;
+
+		& > fieldset {
+
+			&:not(:nth-child(3)) {
+				grid-column: 1;
+			}
+			
+			&:nth-child(3), {
+				grid-row: 1/4 !important;
+				grid-column: 2 !important;
+			}
+		}
+	}
+}
+
+.footer {
+	background-color: $black-75;
+	color: $white-75;
+	padding: 20px 0;
+
+	& > span {
+		margin: auto;
+
+		color: $white-20;
+		font-style: italic;
+	}
+		
+	& > ul {
+		@extend [data-stretch=Y];
+		@extend [data-align=center];
+
+		padding: 15px;
+		grid-gap: 25px;
+
+		& > li {
+			@extend [data-align=center];
+			
+			grid-row: 1;
+			width: 40px;
+			height: 40px;
+
+			background-color: $white-10;
+			border-radius: 50%;
+			color: inherit;
+			font-size: 1.2em;
+
+			& > a {
+				@extend [data-stretch=XY];
+				@extend [data-align=center];
+
+				text-align: center;
+
+				& > i {
+					@extend [data-stretch=XY];
+					@extend [data-align=center];
+
+					line-height: 40px;
+				}
+			}
+
+			&:hover {
+				color: white;
+
+				&.facebook {
+					background-color: #3b5998;
+				}
+				
+				&.twitter {
+					background-color: #0084b4;
+				}
+
+				&.google-plus {
+					background-color: #d34836;
+				}
+			}
+		}
+	}
+}
+
+.underfooter {
+	padding: 5px;
+
+	background-color: #222;
+	color: $white-20;
+
+	& > * {
+		grid-row: 1;
+		margin: auto;
+	}
+}
+

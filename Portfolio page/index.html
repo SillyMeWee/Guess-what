@@ -24,19 +24,18 @@
 						</div>
 					</div>
 				</div>
-				<div class="main-title"><span><big>C</big>AMELOID</span></div>
+				<div class="main-title"><span>CAMELOID</span></div>
 				<div class="navbar">
 					<!-- dio za pozivanje skripta -->
-					 <div id="navDropdown" class="dropdown" >
-						<button onclick="myFunction()" class="drop-btn"><span>Dropdown</span><i>ikonica ide ovdje</i></button>  
-					 	<div  class="dropdown-content">
+					 <div class="dropdown" id="navDropdown">
+						<button onclick="myFunction()" class="drop-btn"><span>Menu</span><i>ikonica ide ovdje</i></button>  
+					 	<div class="dropdown-content">
 						    <ul>
 						    <li><a href="#"><span>Home</span></a></li>
 						    <li><a href="#"><span>About</span></a></li>
 						    <li><a href="#"><span>Contact</span></a></li>
 							</ul>
 						</div>
-					 	<i>ikonica ide ovdje</i>
 					 </div>
   				</div>
 			</div>
@@ -60,26 +59,26 @@
 			</div>
 <!-- Main container is a place where main container things are placed. Images for thingies, their texts etc -->
 			<div class="main-container">
-				<div class="container1">
-					<div class="img-container">
-						<div class="img">
-							<img src="#">
+				<div class="container">
+					<div class="img-container" data-scroll="none">
+						<div class="img" data-align="N" data-stretch="XY">
+							<img src="assets/media/images/page thumbnails/page thumbnail 000.png" data-align="abs-inside-N" data-stretch="X">
 						</div>
 					</div>
 					<div class="container-text"><span>Container text 1</span></div>
 				</div>
-				<div class="container1">
-					<div class="img-container">
-						<div class="img">
-							<img src="#">
+				<div class="container">
+					<div class="img-container" data-scroll="none">
+						<div class="img" data-align="N" data-stretch="XY">
+							<img src="assets/media/images/page thumbnails/page thumbnail 000.png" data-align="abs-inside-N" data-stretch="X">
 						</div>
 					</div>
 					<div class="container-text"><span>Container text 2</span></div>
 				</div>
-				<div class="container1">
-					<div class="img-container">
-						<div class="img">
-							<img src="#">
+				<div class="container">
+					<div class="img-container" data-scroll="none">
+						<div class="img" data-align="N" data-stretch="XY">
+							<img src="assets/media/images/page thumbnails/page thumbnail 000.png" data-align="abs-inside-N" data-stretch="X">
 						</div>
 					</div>
 					<div class="container-text"><span>Container text 3</span></div>
@@ -87,50 +86,79 @@
 			</div>
 <!-- Nice form field ripped of from z netz. Should work nicley -->
 			<div class="contact">
-				<div class="contact-container">  
-				  <form id="contact" action="" method="post">
-				    
-				    <fieldset>
-				      <input placeholder="Your name" type="text" tabindex="1" required autofocus>
-				    </fieldset>
-				    <fieldset>
-				      <input placeholder="Your Email Address" type="email" tabindex="2" required>
-				    </fieldset>
-				    <fieldset>
-				      <input placeholder="Your Phone Number" type="tel" tabindex="3" required>
-				    </fieldset>
-				   <fieldset>
-				      <textarea placeholder="Type your Message Here...." tabindex="4" required></textarea>
-				    </fieldset>
-				    <fieldset>
-				      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit to ME!!!</button>
-				    </fieldset>
-				  </form>
- 			<!-- you wanted a button here -->
- 				<button>I'm a button</button>
+				<div class="contact-container">
+
+<!-- This is the quick way of sending an email -->
+					<div class="reach-us">
+						<form id="contact" action="" method="post">
+
+<!-- Step 1 fields are required -->  
+							<div id="reachUsStepOne">
+								<fieldset>
+									<input placeholder="Your Email Address" type="email" tabindex="1" required>
+								</fieldset>
+								<fieldset>
+									<input placeholder="Subject" type="text" tabindex="2" required>
+								</fieldset>
+							</div>
+
+<!-- Step 2 is just the message body, optional -->
+							<div id="reachUsStepTwo">
+								<fieldset>
+									<textarea placeholder="Type Your Message Here...." tabindex="3"></textarea>
+								</fieldset>
+							</div>
+
+<!-- Step 3 are the additional options, entirely skippable just like step 2 -->
+							<div id="reachUsStepThree">
+								<fieldset>
+							    	<input placeholder="Your Name" type="text" tabindex="4">
+								</fieldset>
+								<fieldset>
+									<input placeholder="Your Phone Number" type="tel" tabindex="5">
+								</fieldset>
+								<fieldset>
+									<button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit to ME!!!</button>
+								</fieldset>
+							</div>
+
+						</form>
+					</div>
+
+					<div class="contact-info">
+<!-- Contact information goes here -->
+					</div>
+
 				</div>
 			</div>
 <!-- Nobody cares about footer -->
 			<div class="footer">
+				<span>Follow us</span>
 				<ul>
-					<li><a href="#">first link </a></li>
-					<li><a href="#">second link </a></li>
-					<li><a href="#">third link </a></li>
+					<li class="facebook"><a class="stretch" href="#">
+						<i class="fa fa-facebook"></i>
+					</a></li>
+					<li class="twitter"><a class="stretch" href="#">
+						<i class="fa fa-twitter"></i>
+					</a></li>
+					<li class="google-plus"><a class="stretch" href="#">
+						<i class="fa fa-google-plus"></i>
+					</a></li>
 				</ul>
 			</div>
 			<!-- this is the all rights reserved/version number/year of establishment/??? part. The.... underfooter (?) -->
-			<div></div>
+			<div class="underfooter">
+				<span><tiny>Cameloid v2018.1.3</tiny></span>
+			</div>
 		</div>
 
 
 
 
-<!--
-		<i class="material-icons">home</i>
-		<i class="fa fa-pinterest"></i>
-
 		<script src="assets/js/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="assets/js/main.js"></script>
+
+<!--
 		
 		
 		Material Icons
