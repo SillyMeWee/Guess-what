@@ -38,15 +38,15 @@
 	2. Media query setup
 
 */
-[data-stretch=X], .banner {
+[data-stretch=X], .divider.horizontal, .header, .banner, .section-banner, .section-banner > .container, .main-container {
   width: 100% !important;
   width: -moz-available !important; }
 
-[data-stretch=Y], #navDropdown, #navDropdown > .drop-btn, .footer > ul {
+[data-stretch=Y], .divider.vertical, #navDropdown, #navDropdown > .drop-btn, .footer > ul {
   height: 100% !important;
   height: -moz-available !important; }
 
-[data-stretch=XY], a.stretch:not(.default), .footer > ul > li > a, .footer > ul > li > a > i {
+[data-stretch=XY], a.stretch:not(.default), .banner > .img-container, .footer > ul > li > a, .footer > ul > li > a > i {
   width: 100% !important;
   width: -moz-available !important;
   height: 100% !important;
@@ -56,7 +56,7 @@
   overflow-x: auto !important;
   overflow-y: hidden !important; }
 
-[data-scroll=Y] {
+[data-scroll=Y], .popup {
   overflow-x: hidden !important;
   overflow-y: auto !important; }
 
@@ -64,7 +64,7 @@
   overflow-x: auto !important;
   overflow-y: auto !important; }
 
-[data-scroll=none], .img-container {
+[data-scroll=none], .banner, .img-container {
   overflow: hidden; }
 
 /*
@@ -254,11 +254,11 @@
 		2.	main stylesheet for the page
 
 */
-/* ==== 2. Initial setup ==== */
+/* ==== 1. Initial setup ==== */
 body {
   margin: 0; }
 
-div, ul:not(.default), button:not(.default), input:not(.default) {
+div, ul:not(.default), button:not(.default), button:not(.default):hover, button:not(.default):active, button:not(.default):focus, input:not(.default), textarea:not(.default) {
   box-sizing: border-box;
   display: grid;
   position: relative; }
@@ -272,31 +272,44 @@ ul:not(.default) {
     margin: 0;
     list-style: none; }
 
-button:not(.default) {
+button:not(.default), button:not(.default):hover, button:not(.default):active, button:not(.default):focus {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   border-radius: 3px;
-  padding: 1em .5em;
+  padding: .5em 1em;
   margin: 0;
   align-items: normal;
   background-color: transparent;
   outline: none;
-  font-family: inherit; }
-  button:not(.default).primary-btn {
-    border: none;
-    background-color: #444; }
+  font-family: inherit;
+  font-size: 1em; }
+button:not(.default).primary-btn {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #444;
+  border: none; }
+  button:not(.default).primary-btn:hover {
+    background-color: #888; }
+button:not(.default).secondary-btn {
+  color: white;
+  border: solid 2px white; }
+  button:not(.default).secondary-btn:hover {
+    color: #444;
+    border-color: #444; }
 
-input:not(.default) {
+input:not(.default), textarea:not(.default) {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   border-radius: 3px;
-  padding: 0 5px;
+  padding: .5em 5px;
   margin: 0;
+  min-width: 200px;
   border: none; }
-  input:not(.default):focus, input:not(.default):hover, input:not(.default):invalid {
+  input:not(.default):focus, input:not(.default):hover, input:not(.default):invalid, textarea:not(.default):focus, textarea:not(.default):hover, textarea:not(.default):invalid {
     outline: none; }
+  input:not(.default), input:not(.default)::placeholder, textarea:not(.default), textarea:not(.default)::placeholder {
+    font-family: "Arial"; }
 
 a:not(.default) {
   display: inline;
@@ -312,25 +325,52 @@ tiny {
 fieldset {
   border: none; }
 
-/* ==== 3. Stylesheet ==== */
+.divider {
+  margin: 0;
+  padding: 0; }
+  .divider.horizontal {
+    height: 0;
+    margin: 10px 0;
+    border-top: solid 1px rgba(127, 127, 127, 0.2); }
+  .divider.vertical {
+    width: 0;
+    margin: 0 10px;
+    border-right: solid 1px rgba(127, 127, 127, 0.2); }
+
+/* ==== 2. Stylesheet ==== */
 .wrapper {
   grid-template-columns: auto;
   font-family: "Myriad Pro", sans-serif;
   font-size: 18px; }
 
 .header {
+  position: fixed;
+  height: 50px;
   grid-template-columns: auto 1fr auto;
-  background-color: rgba(0, 0, 0, 0.75);
-  color: rgba(255, 255, 255, 0.75); }
+  background-color: #222;
+  color: rgba(255, 255, 255, 0.75);
+  z-index: 100; }
   .header > .logo {
     grid-column: 1; }
   .header > .main-title {
-    grid-column: 2; }
+    grid-column: 2;
+    cursor: default; }
   .header > .navbar {
     grid-column: 3; }
 
 .banner {
-  height: 100vh; }
+  height: 100vh;
+  background-color: #444; }
+  .banner > .img-container {
+    position: absolute; }
+    .banner > .img-container:nth-child(1) {
+      background-color: #7f7f7f; }
+    .banner > .img-container:nth-child(2) {
+      margin-left: 100%;
+      background-color: #ff7f00; }
+    .banner > .img-container:nth-child(3) {
+      margin-left: 200%;
+      background-color: #ff007f; }
 
 .main-container {
   grid-gap: 50px;
@@ -379,10 +419,9 @@ fieldset {
 .dropdown {
   padding: 0 10px; }
   .dropdown > .drop-btn {
-    padding: 0 10px;
-    border-radius: 0; }
+    border-radius: 0 !important; }
     .dropdown > .drop-btn:hover {
-      background-color: rgba(0, 0, 0, 0.2); }
+      background-color: #ff7f00; }
       .dropdown > .drop-btn:hover * {
         color: white; }
   .dropdown > .dropdown-content {
@@ -390,10 +429,24 @@ fieldset {
 
 .main-title {
   font-weight: bold;
-  letter-spacing: 1px; }
-  .main-title big {
-    font-family: "Arial";
-    font-size: 1.5em; }
+  letter-spacing: 8px; }
+
+.section-banner {
+  padding: 25px 10%;
+  background-color: #007fff;
+  color: white; }
+  .section-banner > .container {
+    max-width: 1200px;
+    justify-items: start; }
+    .section-banner > .container > .title {
+      font-family: "Arial", sans-serif;
+      font-size: 2.5em;
+      font-style: bold; }
+    .section-banner > .container > .subtitle {
+      color: rgba(255, 255, 255, 0.75);
+      font-family: "Arial";
+      font-size: .75em;
+      text-transform: uppercase; }
 
 .main-container > .container {
   background-color: rgba(0, 0, 0, 0.1); }
@@ -411,21 +464,68 @@ fieldset {
     display: none; }
 
 .contact-container {
-  background-color: rgba(0, 0, 0, 0.5); }
-  .contact-container > #contact {
-    grid-template-columns: 1fr 1fr;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px; }
+  .contact-container > .reach-us > span {
+    margin: auto;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5); }
+  .contact-container > .reach-us > #contact {
     grid-gap: 10px;
     margin: auto; }
-    .contact-container > #contact > fieldset:not(:nth-child(3)) {
-      grid-column: 1; }
-    .contact-container > #contact > fieldset:nth-child(3) {
-      grid-row: 1/4 !important;
-      grid-column: 2 !important; }
+  .contact-container > .reach-us fieldset > * {
+    margin: auto; }
+  .contact-container > .reach-us button {
+    width: fit-content;
+    margin: auto; }
+  .contact-container > .reach-us #reachUsStepTwo {
+    display: none; }
+  .contact-container > .reach-us #reachUsStepThree {
+    display: none; }
+  .contact-container > .reach-us textarea {
+    width: 20vw;
+    height: 15vh; }
+  .contact-container > .reach-us .popup-container {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto; }
+    .contact-container > .reach-us .popup-container textarea {
+      grid-column: 1/3;
+      grid-row: 1; }
+
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: 150;
+  background-color: rgba(0, 0, 0, 0.75); }
+  .popup > .popup-container {
+    width: fit-content;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.5); }
+
+.step-buttons {
+  padding: 10px 0;
+  width: fit-content;
+  grid-gap: 10px;
+  margin: auto; }
+  .step-buttons > * {
+    grid-row: 1;
+    width: 10px;
+    height: 10px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%; }
+    .step-buttons > *:hover {
+      background-color: white; }
+    .step-buttons > *.active {
+      background-color: rgba(0, 0, 0, 0.5); }
 
 .footer {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: #222;
   color: rgba(255, 255, 255, 0.75);
-  padding: 20px 0; }
+  padding-top: 20px; }
   .footer > span {
     margin: auto;
     color: rgba(255, 255, 255, 0.2);
@@ -455,14 +555,13 @@ fieldset {
           background-color: #d34836; }
 
 .underfooter {
-  padding: 5px;
+  padding: 5px 20px;
   background-color: #222;
   color: rgba(255, 255, 255, 0.2); }
   .underfooter > * {
-    grid-row: 1;
     margin: auto; }
 
-div, ul:not(.default), button:not(.default), input:not(.default) {
+div, ul:not(.default), button:not(.default), button:not(.default):hover, button:not(.default):active, button:not(.default):focus, input:not(.default), textarea:not(.default) {
   box-sizing: border-box;
   display: grid;
   position: relative; }
