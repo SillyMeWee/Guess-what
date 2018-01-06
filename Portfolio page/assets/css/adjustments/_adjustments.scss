@@ -67,6 +67,7 @@ button:not(.default) {
 		outline: none;
 		font-family: inherit;
 		font-size: 1em;
+		line-height: 1.5em;
 	}
 
 	&.primary-btn {
@@ -148,7 +149,7 @@ fieldset {
 		height: 0;
 		margin: 10px 0;
 		
-		border-top: solid 1px rgba(127,127,127,.2);
+		border-top: solid 1px $white-10;
 	}
 
 	&.vertical {
@@ -156,8 +157,44 @@ fieldset {
 		width: 0;
 		margin: 0 10px;
 
-		border-right: solid 1px rgba(127,127,127,.2);
+		border-right: solid 1px $white-10;
 	}
+}
+
+
+/*	All images are in two containers:
+	First container hides overflow with data-scroll=none
+	Second container wraps around the image and fills the whole parent with it
+
+	This is set by default for images where width >= height.
+	To override it and fill the container for images where height > width
+	use the .vertical class on the first container.
+
+*/
+.img-container {
+	// hide overflow
+	@extend [data-scroll=none];
+
+	& > .img {
+		@extend [data-align=abs-center];
+	}
+
+	/*&.vertical {
+		& > .img {
+			// position the image parent correctly
+			@extend [data-align=abs-center];
+			// stretch the image to fit by width,
+			// height may overflow
+			@extend [data-stretch=X];
+			
+			& > img {
+				// position the image correctly
+				@extend [data-align=abs-center];
+				// fit image to parent's width
+				@extend [data-stretch=X];
+			}
+		}
+	}*/
 }
 
 
@@ -179,8 +216,8 @@ fieldset {
 			// when the logo and navbar have different widths
 	
 	position: fixed;
-	height: 50px;
-	grid-template-columns: auto 1fr auto;
+	//height: 50px;
+	grid-template-columns: auto auto 1fr auto;
 	//transform: translateY(100%);
 
 	background-color: $primary-color-dark;
@@ -191,6 +228,9 @@ fieldset {
 	& > .logo {
 		// place in the left column
 		grid-column: 1;
+		width: 2.5em;
+		height: 2.5em;
+		margin: 0 10px;
 		
 		& > * {
 			// align with left edge
@@ -206,7 +246,10 @@ fieldset {
 		
 		& > * {
 			// align to the middle
-			@extend [data-align=center];
+			@extend [data-align=E];
+			margin: 0 10px;
+
+			transform: translateY(10%);
 		}
 	}
 
@@ -288,40 +331,35 @@ fieldset {
 	}
 }
 
+ul.menu {
+	& > li {
+		& > a {
+			& > button {
+				cursor: pointer;
 
-/*	All images are in two containers:
-	First container hides overflow with data-scroll=none
-	Second container wraps around the image and fills the whole parent with it
+				color: $white-50 !important;
+				border-radius: 0 !important;
 
-	This is set by default for images where width >= height.
-	To override it and fill the container for images where height > width
-	use the .vertical class on the first container.
+				&, &:hover, &:active, &:focus {
+					border: none !important;
+				}
 
-*/
-.img-container {
-	// hide overflow
-	@extend [data-scroll=none];
-
-	& > .img {
-		@extend [data-align=abs-center];
-	}
-
-	/*&.vertical {
-		& > .img {
-			// position the image parent correctly
-			@extend [data-align=abs-center];
-			// stretch the image to fit by width,
-			// height may overflow
-			@extend [data-stretch=X];
-			
-			& > img {
-				// position the image correctly
-				@extend [data-align=abs-center];
-				// fit image to parent's width
-				@extend [data-stretch=X];
+				&:hover {
+					background-color: $white-20 !important;
+					color: $white !important;
+				}
 			}
 		}
-	}*/
+	}
+	&.horizontal {
+		& > li {
+			grid-row: 1;
+		}
+	}
+}
+
+.navbar {
+
 }
 
 .dropdown {
@@ -394,6 +432,8 @@ fieldset {
 .main-container {
 	@extend [data-stretch=X];
 
+	padding-bottom: 50px;
+
 	& > .container {
 		background-color: $black-10;
 
@@ -429,16 +469,22 @@ fieldset {
 }
 
 .contact-container {
+	grid-template-columns: 2fr auto auto 2fr 1fr;
+	grid-gap: 50px;
+	padding: 50px;
+
 	background-color: $black-50;
-	padding: 15px;
+	font-family: $text-font;
 
 	& > .reach-us {
+		@extend [data-align=E];
 		
-		& > span {
+		& > .title {
 			margin: auto;
 
-			font-style: italic;
 			color: $white-50;
+			//font-style: italic;
+			text-transform: capitalize;
 		}
 
 		& > #contact {
@@ -479,6 +525,35 @@ fieldset {
 				grid-row: 1;
 			}
 		}
+	}
+
+	& > .divider.horizontal {
+		margin: 0 50px;
+	}
+
+	& > .contact-info {
+		color: $white-50;
+
+		& > .title {
+			text-transform: capitalize;
+		}
+
+		& > *:not(.title) {
+			&:hover {
+				color: $white-75;
+				cursor: default;
+			}
+		}
+
+	}
+
+	iframe {
+		@extend div;
+		@include border(5px, $white);
+		@include border-radius(5px);
+		@include shadow(3px, 6px, $black-20);
+		
+		border-width: 10px 20px;
 	}
 }
 
